@@ -1,7 +1,7 @@
 /****************************************************************************/
 /*                                                                          */
-/* Projet.................: Manipulation de fichiers                        */
-/* Programme..............: fichier_multilingue.cpp                         */
+/* Projet.................: Projet pendu                                    */
+/* Programme..............: jeu_pendu.cpp                                   */
 /* Effectué pour..........: 420-135-SH_Introduction_à_la_programmation      */
 /*                                                                          */
 /* Auteur.................: Camélia Groleau                                 */
@@ -35,75 +35,16 @@
 /*************************************/
 /* Espace de nom                     */
 /*************************************/
-#include <cstring>
-#include <fstream>
-#include <iostream>
+  #include <cstring>                  //
+  #include <fstream>                  //
+  #include <iostream>                 //
+  #include "jeu_pendu_Camelia.cpp"    //
 
 /*************************************/
-/* Espace de nom                     */
+/* Variables globales                */
 /*************************************/
-  using namespace std;
+  char vgl_affichage[23][80];
 
 /*************************************/
 /* Constantes                        */
 /*************************************/
-
-
-
-
-
-
-
-
-
-
-/*char fMotComplet(char* vec_MotEntrer, char* vec_Mot)
-{
-  char* vec_Mot = "unmot";
-  
-  cin >> vec_MotEntrer;
-  if (vec_MotEntrer [0] == "#" && vec_MotEntrer == vec_Mot)
-  {
-    cout << "Bonne Reponse";
-    
-    
-    
-  }
-  
-    
-    
-  return 0; 
-}*/
-    
-    
-    
-    
-/*==========================================================================*/
-  int main ()
-/*==========================================================================*/
-/* Programme principal                                                      */
-/*==========================================================================*/
-  {
-    
-  char* vec_MotEntrer = "blabla";  
-  char* vec_Mot = "unmot";
-  
-  cin >> vec_MotEntrer;
-  if (vec_MotEntrer [0] == "#" && vec_MotEntrer == vec_Mot)
-  {
-    cout << "Bonne Reponse";
-  }
-  else
-  {
-    cout <<"Mauvaise reponse";
-  }
-    
-    
-    return 0;
-  }
-
-    
-    
-    
-    
-    
