@@ -38,3 +38,14 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+
+char vgl_affichage[23][80];
+
+void pAfficheEcran ()
+{
+  system("cls");
+  for (int row = 0; row < 23; row++)
+  {
+    printf("%s", vgl_affichage[row]);
+  }
+}
