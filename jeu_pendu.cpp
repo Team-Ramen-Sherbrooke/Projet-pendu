@@ -38,3 +38,72 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+
+/*************************************/
+/* Espace de nom                     */
+/*************************************/
+  using namespace std;
+
+/*************************************/
+/* Constantes                        */
+/*************************************/
+
+
+
+
+
+
+
+
+
+
+/*char fMotComplet(char* vec_MotEntrer, char* vec_Mot)
+{
+  char* vec_Mot = "unmot";
+  
+  cin >> vec_MotEntrer;
+  if (vec_MotEntrer [0] == "#" && vec_MotEntrer == vec_Mot)
+  {
+    cout << "Bonne Reponse";
+    
+    
+    
+  }
+  
+    
+    
+  return 0; 
+}*/
+    
+    
+    
+    
+/*==========================================================================*/
+  int main ()
+/*==========================================================================*/
+/* Programme principal                                                      */
+/*==========================================================================*/
+  {
+    
+  char* vec_MotEntrer = "blabla";  
+  char* vec_Mot = "unmot";
+  
+  cin >> vec_MotEntrer;
+  if (vec_MotEntrer [0] == "#" && vec_MotEntrer == vec_Mot)
+  {
+    cout << "Bonne Reponse";
+  }
+  else
+  {
+    cout <<"Mauvaise reponse";
+  }
+    
+    
+    return 0;
+  }
+
+    
+    
+    
+    
+    
