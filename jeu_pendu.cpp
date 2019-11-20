@@ -35,3 +35,6 @@
 /*************************************/
 /* Espace de nom                     */
 /*************************************/
+#include <cstring>
+#include <fstream>
+#include <iostream>
