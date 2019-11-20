@@ -39,6 +39,7 @@
   #include <fstream>                  //
   #include <iostream>                 //
   #include "jeu_pendu_Camelia.cpp"    //
+  #include "jeu_penduDavid.cpp"       //
 
 /*************************************/
 /* Variables globales                */
