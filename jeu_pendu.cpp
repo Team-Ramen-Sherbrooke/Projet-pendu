@@ -49,7 +49,7 @@
 /*************************************/
 /* Variables globales                */
 /*************************************/
-  char vgl_affichage[23][80];
+  char vgl_affichage[23][81];
   bool vgl_lettresChoisies[26] =
   {
     false, //a
@@ -78,7 +78,7 @@
     false, //x
     false, //y
     false  //z
-  }
+  } ;
   char vgl_mot[40];
 
 /*************************************/
