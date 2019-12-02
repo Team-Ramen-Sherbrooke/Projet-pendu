@@ -79,6 +79,7 @@
     false, //y
     false  //z
   }
+  char vgl_mot[40];
 
 /*************************************/
 /* Constantes                        */
