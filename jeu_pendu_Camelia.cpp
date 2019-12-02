@@ -37,16 +37,16 @@
   /////////////////////
   //Affichage initial//
   /////////////////////
-  //                                                                                                                               //     Ligne 00
-  const char *cst_BarreSupEtInfTitre       = "                               ******************\n";                                //18 * Ligne 01
-  const char *cst_Titre                    = "                               |  JEU DU PENDU  |\n";                                //     Ligne 02
-  //                                                                         ******************                                    //     Ligne 03
-  //                                                                                                                               //     Ligne 04
-  //                                                                                                                               //     Ligne 05
-  const char *cst_DessusPendu              = "                                     _____\n";                                       //     Ligne 06
-  const char *cst_PoteauPremiereLigne      = "                                     |/\n";                                          //     Ligne 07
-  const char *cst_PoteauVertical           = "                                     |\n";                                           //     Ligne 08
-  //                                                                               |                                               //     Ligne 09
+  //                                                                                                                               //     Ligne  0
+  const char *cst_BarreSupEtInfTitre       = "                               ******************\n";                                //18 * Ligne  1
+  const char *cst_Titre                    = "                               |  JEU DU PENDU  |\n";                                //     Ligne  2
+  //                                                                         ******************                                    //     Ligne  3
+  //                                                                                                                               //     Ligne  4
+  //                                                                                                                               //     Ligne  5
+  const char *cst_DessusPendu              = "                                     _____\n";                                       //     Ligne  6
+  const char *cst_PoteauPremiereLigne      = "                                     |/\n";                                          //     Ligne  7
+  const char *cst_PoteauVertical           = "                                     |\n";                                           //     Ligne  8
+  //                                                                               |                                               //     Ligne  9
   //                                                                               |                                               //     Ligne 10
   const char *cst_PoteauBase               = "                                   __|_______\n";                                    //     Ligne 11
   //                                                                                                                               //     Ligne 12
@@ -89,16 +89,16 @@
 /* Utilise: N\A                                                                                                                                                              */
 /*===========================================================================================================================================================================*/
   {
-    strcpy(affichage[ 0], "\n");                       //Ligne 00
-    strcpy(affichage[ 1], cst_BarreSupEtInfTitre);     //Ligne 01
-    strcpy(affichage[ 2], cst_Titre);                  //Ligne 02
-    strcpy(affichage[ 3], cst_BarreSupEtInfTitre);     //Ligne 03
-    strcpy(affichage[ 4], "\n");                       //Ligne 04
-    strcpy(affichage[ 5], "\n");                       //Ligne 05
-    strcpy(affichage[ 6], cst_DessusPendu);            //Ligne 06
-    strcpy(affichage[ 7], cst_PoteauPremiereLigne);    //Ligne 07
-    strcpy(affichage[ 8], cst_PoteauVertical);         //Ligne 08
-    strcpy(affichage[ 9], cst_PoteauVertical);         //Ligne 09
+    strcpy(affichage[ 0], "\n");                       //Ligne  0
+    strcpy(affichage[ 1], cst_BarreSupEtInfTitre);     //Ligne  1
+    strcpy(affichage[ 2], cst_Titre);                  //Ligne  2
+    strcpy(affichage[ 3], cst_BarreSupEtInfTitre);     //Ligne  3
+    strcpy(affichage[ 4], "\n");                       //Ligne  4
+    strcpy(affichage[ 5], "\n");                       //Ligne  5
+    strcpy(affichage[ 6], cst_DessusPendu);            //Ligne  6
+    strcpy(affichage[ 7], cst_PoteauPremiereLigne);    //Ligne  7
+    strcpy(affichage[ 8], cst_PoteauVertical);         //Ligne  8
+    strcpy(affichage[ 9], cst_PoteauVertical);         //Ligne  9
     strcpy(affichage[10], cst_PoteauVertical);         //Ligne 10
     strcpy(affichage[11], cst_PoteauBase);             //Ligne 11
     strcpy(affichage[12], "\n");                       //Ligne 12
