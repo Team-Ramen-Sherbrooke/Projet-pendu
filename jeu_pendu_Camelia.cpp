@@ -63,7 +63,7 @@
   //                                                                                                                               //      Ligne 16
   //                                                                                                                               //      Ligne 17
   const char *cst_BarreHorizontalePleine   = "-------------------------------------------------------------------------------\n";  //79 -  Ligne 18
-  const char *cst_MauvaisCaracInitial      = " Caracteres demandes, mais absents du mot: \n";                                      //      Ligne 19 Devra se voir ajouter les caractères essayés
+  const char *cst_MauvaisCaracInitial      = " Caracteres demandes, mais absents du mot:\n";                                       //      Ligne 19 Devra se voir ajouter les caractères essayés
   //                                          --------------------------------------------------------------------------------     //      Ligne 20
   const char *cst_Indication               = " Entrez un caractere (ou '#' suivi du mot que vous voulez essayer):            \n";  //      Ligne 21
   const char *cst_Curseur                  = " >";                                                                                 //      Ligne 22
@@ -288,6 +288,9 @@
         {
           if (!nbDeLettresErronees)
           {
+            
+            ligne[posDansLigne] = ' ';
+            posDansLigne++;
             ligne[posDansLigne] = fCorrespondanceChiffreLettre(nbDeLaLettre);
             posDansLigne++;
             nbDeLettresErronees++;
