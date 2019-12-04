@@ -208,7 +208,7 @@
   {
     int nbDeLettresErronees = 0;
     char ligne[81];
-    int posDansLigne = 43;
+    int posDansLigne = 42;
     bool lettreErronee = true;
     
     strcpy(ligne, cst_MauvaisCarac);
