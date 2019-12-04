@@ -246,6 +246,6 @@
         }
       }
     }
-    ligne[80] = '\n';
+    ligne[posDansLigne] = '\n';
     pStringReplace(affichage[19], ligne);
   }
