@@ -63,7 +63,7 @@
   //                                                                                                                               //      Ligne 16
   //                                                                                                                               //      Ligne 17
   const char *cst_BarreHorizontalePleine   = "-------------------------------------------------------------------------------\n";  //79 -  Ligne 18
-  const char *cst_MauvaisCaracInitial      = " Caracteres demandes, mais absents du mot:\n";                                       //      Ligne 19 Devra se voir ajouter les caractères essayés
+  //                                       = " Caracteres demandes, mais absents du mot:\n";                                       //      Ligne 19 Devra se voir ajouter les caractères essayés
   //                                          --------------------------------------------------------------------------------     //      Ligne 20
   const char *cst_Indication               = " Entrez un caractere (ou '#' suivi du mot que vous voulez essayer):            \n";  //      Ligne 21
   const char *cst_Curseur                  = " >";                                                                                 //      Ligne 22
@@ -71,7 +71,7 @@
   /////////////////////////
   //Lignes additionnelles//
   /////////////////////////
-  const char *cst_MauvaisCarac             = " Caracteres demandes, mais absents du mot: ";                                        //Copie Ligne 19 mais sans le retour à la ligne pour permettre l'ajout des autres lettres
+  const char *cst_MauvaisCarac             = " Caracteres demandes, mais absents du mot:                                     \n";  //Copie Ligne 19 mais sans le retour à la ligne pour permettre l'ajout des autres lettres
   
   //////////////////////////
   //Caractère déjà utilisé//
@@ -136,7 +136,7 @@
     strcpy(affichage[16], "\n");                       //Ligne 16
     strcpy(affichage[17], "\n");                       //Ligne 17
     strcpy(affichage[18], cst_BarreHorizontalePleine); //Ligne 18
-    strcpy(affichage[19], cst_MauvaisCaracInitial);    //Ligne 19
+    strcpy(affichage[19], "\n");                       //Ligne 19
     strcpy(affichage[20], cst_BarreHorizontalePleine); //Ligne 20
     strcpy(affichage[21], cst_Indication);             //Ligne 21
     strcpy(affichage[22], cst_Curseur);                //Ligne 22
@@ -266,7 +266,8 @@
 /*===========================================================================================================================================================================*/
   {
     int nbDeLettresErronees = 0;
-    char ligne[81];
+    char ligne[81]; 
+    pStringReplace(ligne, cst_MauvaisCarac);
     int posDansLigne = 42;
     bool lettreErronee = true;
     
@@ -308,7 +309,6 @@
         }
       }
     }
-    ligne[posDansLigne] = '\n';
     pStringReplace(affichage[19], ligne);
   }
 
