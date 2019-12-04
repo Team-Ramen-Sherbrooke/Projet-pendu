@@ -43,7 +43,6 @@ void pMotAleatoire (char vec_motAleatoire[cst_longeurMaxMot])
   {
     vec_motAleatoire[var_position] = toupper(vec_motAleatoire[var_position]);
   }
-  cout<<var_randomisation<<"\n"<<var_choixMot<<"\n"<<vec_motAleatoire;
 }
 
 bool fVeutContinuer ()
@@ -57,13 +56,4 @@ bool fVeutContinuer ()
   char var_continuer ='0';
   cin>>var_continuer;
   return toupper(var_continuer) == 'O';
-}
-
-
-int main ()
-{
-  char vec_motAleatoire[cst_longeurMaxMot]="\0";
-  
-  pMotAleatoire(vec_motAleatoire);
-  return 0;
 }

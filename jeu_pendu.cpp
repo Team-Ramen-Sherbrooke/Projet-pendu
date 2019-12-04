@@ -44,7 +44,8 @@
   #include <fstream>                  //
   #include <iostream>                 //
   #include "jeu_pendu_Camelia.cpp"    // pAfficheEcran, pAffichageInitial, pAffichageBarresVides, fCorrespondanceLettreChiffre
-  //#include "jeu_penduDavid.cpp"       //
+  #include "jeu_penduDavid.cpp"       //
+  #include "Pendu_teste_vincent.cpp"  // fonction pour continuer et procédure pour le mot aléatoire 
 
 /*************************************/
 /* Variables globales                */
