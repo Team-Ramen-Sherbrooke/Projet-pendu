@@ -320,8 +320,8 @@
 /*===========================================================================================================================================================================*/
   {
     
-    using namespace std::this_thread;   // sleep_for, sleep_until
-    using namespace std::chrono;        // nanoseconds, system_clock, seconds
+    using namespace std::this_thread;   // sleep_for
+    using namespace std::chrono;        // milliseconds
     
     char affichageTemp [23][81];
     for (int frame = 0; frame < 6; frame++)
