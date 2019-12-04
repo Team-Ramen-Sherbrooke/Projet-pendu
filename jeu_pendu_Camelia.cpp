@@ -37,29 +37,34 @@
   /////////////////////
   //Affichage initial//
   /////////////////////
-  //                                                                                                                               //     Ligne  0
-  const char *cst_BarreSupEtInfTitre       = "                               ******************\n";                                //18 * Ligne  1
-  const char *cst_Titre                    = "                               |  JEU DU PENDU  |\n";                                //     Ligne  2
-  //                                                                         ******************                                    //     Ligne  3
-  //                                                                                                                               //     Ligne  4
-  //                                                                                                                               //     Ligne  5
-  const char *cst_DessusPendu              = "                                     _____\n";                                       //     Ligne  6
-  const char *cst_PoteauPremiereLigne      = "                                     |/\n";                                          //     Ligne  7
-  const char *cst_PoteauVertical           = "                                     |\n";                                           //     Ligne  8
-  //                                                                               |                                               //     Ligne  9
-  //                                                                               |                                               //     Ligne 10
-  const char *cst_PoteauBase               = "                                   __|_______\n";                                    //     Ligne 11
-  //                                                                                                                               //     Ligne 12
-  //                                                                                                                               //     Ligne 13
-  //                                                                                                                               //     Ligne 14 Devra contenir les lignes vides
-  //                                                                                                                               //     Ligne 15
-  //                                                                                                                               //     Ligne 16
-  //                                                                                                                               //     Ligne 17
-  const char *cst_BarreHorizontalePleine   = "-------------------------------------------------------------------------------\n";  //80 - Ligne 18
-  const char *cst_MauvaisCaracInitial      = " Caracteres demandes, mais absents du mot: \n";                                      //     Ligne 19 Devra se voir ajouter les caractères essayés
-  //                                          --------------------------------------------------------------------------------     //     Ligne 20
-  const char *cst_Indication               = " Entrez un caractere (ou '#' suivi du mot que vous voulez essayer):            \n";  //     Ligne 21
-  const char *cst_Curseur                  = " >";                                                                                 //     Ligne 22
+  //                                                                                                                               //      Ligne  0
+  const char *cst_BarreSupEtInfTitre       = "                               ******************\n";                                //18 *  Ligne  1
+  const char *cst_Titre                    = "                               |  JEU DU PENDU  |\n";                                //      Ligne  2
+  //                                                                         ******************                                    //      Ligne  3
+  //                                                                                                                               //      Ligne  4
+  //                                                                                                                               //      Ligne  5
+  const char *cst_DessusPendu              = "                                     _____\n";                                       //      Ligne  6
+  const char *cst_PoteauPremiereLigne      = "                                     |/\n";                                          //      Ligne  7
+  const char *cst_PoteauVertical           = "                                     |\n";                                           //      Ligne  8
+  //                                                                               |                                               //      Ligne  9
+  //                                                                               |                                               //      Ligne 10
+  const char *cst_PoteauBase               = "                                   __|_______\n";                                    //      Ligne 11
+  //                                                                                                                               //      Ligne 12
+  //                                                                                                                               //      Ligne 13
+  //                                                                                                                               //      Ligne 14 Devra contenir les lignes vides
+  //                                                                                                                               //      Ligne 15
+  //                                                                                                                               //      Ligne 16
+  //                                                                                                                               //      Ligne 17
+  const char *cst_BarreHorizontalePleine   = "-------------------------------------------------------------------------------\n";  //80 -  Ligne 18
+  const char *cst_MauvaisCaracInitial      = " Caracteres demandes, mais absents du mot: \n";                                      //      Ligne 19 Devra se voir ajouter les caractères essayés
+  //                                          --------------------------------------------------------------------------------     //      Ligne 20
+  const char *cst_Indication               = " Entrez un caractere (ou '#' suivi du mot que vous voulez essayer):            \n";  //      Ligne 21
+  const char *cst_Curseur                  = " >";                                                                                 //      Ligne 22
+  
+  /////////////////////////
+  //Lignes additionnelles//
+  /////////////////////////
+  const char *cst_MauvaisCarac             = " Caracteres demandes, mais absents du mot: ";                                        //Copie Ligne 19 mais sans le retour à la ligne pour permettre l'ajout des autres lettres
 
 /*===========================================================================================================================================================================*/
   void pAfficheEcran ( char affichage [23][81])
@@ -113,18 +118,62 @@
     strcpy(affichage[22], cst_Curseur);                //Ligne 22
   }
 
+
 /*===========================================================================================================================================================================*/
-  void pAffichageBarresVides (char affichage [23][81], char mot [40])
+  int fCorrespondanceLettreChiffre (char lettre)
 /*===========================================================================================================================================================================*/
-/* Utilisé par: main                                                                                                                                                         */
+/* Utilisé par: pAffichageBarresVides                                                                                                                                        */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* Cette procédure sert à afficher les barres vides représentant les caractères à trouver                                                                                    */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* Utilise: N\A                                                                                                                                                              */
 /*===========================================================================================================================================================================*/
   {
+    return (int)toupper(lettre) - 0x41;
+  }
+  
+/*===========================================================================================================================================================================*/
+  int fCorrespondanceChiffreLettre (int numero)
+/*===========================================================================================================================================================================*/
+/* Utilisé par: pAffichageBarresVides                                                                                                                                        */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à afficher les barres vides représentant les caractères à trouver                                                                                    */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: N\A                                                                                                                                                              */
+/*===========================================================================================================================================================================*/
+  {
+    return (char)(numero + 0x41);
+  }
+  
+/*===========================================================================================================================================================================*/
+  void pStringReplace (char destination [81], char source [81])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: pAffichageLettresErronees, pAffichageBarresVides                                                                                                             */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à remplacer une ligne par une autre                                                                                                                  */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: N\A                                                                                                                                                              */
+/*===========================================================================================================================================================================*/
+  {
+    for (unsigned int x = 0; x < 81; x++)
+    {
+      destination[x] = source[x];
+    }
+  }
+  
+/*===========================================================================================================================================================================*/
+  void pAffichageBarresVides (char affichage [23][81], char mot [40], bool lettresChoisies[26])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: main                                                                                                                                                         */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à afficher les barres vides représentant les caractères à trouver ainsi que les caractères trouvés                                                   */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: fCorrespondanceLettreChiffre, pStringReplace                                                                                                                     */
+/*===========================================================================================================================================================================*/
+  {
     char ligne[81];
     int x = 40 - strlen(mot);
+    //int numDeLettre = 0;
     for(int i = 0; i < x; i++)
     {
       ligne[i] = ' ';
@@ -132,10 +181,71 @@
     
     for(unsigned int i = 0; i < strlen(mot); i++)
     {
-      ligne[x] = '_';
+      if (lettresChoisies[fCorrespondanceLettreChiffre(mot[i])])
+      {
+        ligne[x] = mot[i];
+      }
+      else
+      {
+        ligne[x] = '_';
+      }
       x++;
       ligne[x] = ' ';
       x++;
     }
-    strcpy(affichage[13], ligne);
+    pStringReplace(affichage[14], ligne);
+  }
+
+/*===========================================================================================================================================================================*/
+  void pAffichageLettresErronees (char affichage [23][81], char mot [40], bool lettresChoisies[26])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: main                                                                                                                                                         */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à afficher les lettres erronées entrées par l'utilisateur                                                                                            */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: fCorrespondanceLettreChiffre, fCorrespondanceChiffreLettre, pStringReplace                                                                                       */
+/*===========================================================================================================================================================================*/
+  {
+    int nbDeLettresErronees = 0;
+    char ligne[81];
+    int posDansLigne = 43;
+    bool lettreErronee = true;
+    
+    strcpy(ligne, cst_MauvaisCarac);
+    for (int nbDeLaLettre = 0; nbDeLaLettre < 26; nbDeLaLettre++)
+    {
+      lettreErronee = true;
+      if (lettresChoisies[nbDeLaLettre])
+      {
+        for (int posDansMot = 0; posDansMot < 40; posDansMot++)
+        {
+          if (fCorrespondanceLettreChiffre(mot[posDansMot]) == nbDeLaLettre)
+          {
+            lettreErronee = false;
+            break;
+          }
+        }
+        if (lettreErronee)
+        {
+          if (!nbDeLettresErronees)
+          {
+            ligne[posDansLigne] = fCorrespondanceChiffreLettre(nbDeLaLettre);
+            posDansLigne++;
+            nbDeLettresErronees++;
+          }
+          else
+          {
+            ligne[posDansLigne] = ',';
+            posDansLigne++;
+            ligne[posDansLigne] = ' ';
+            posDansLigne++;
+            ligne[posDansLigne] = fCorrespondanceChiffreLettre(nbDeLaLettre);
+            posDansLigne++;
+            nbDeLettresErronees++;
+          }
+        }
+      }
+    }
+    ligne[80] = '\n';
+    pStringReplace(affichage[19], ligne);
   }
