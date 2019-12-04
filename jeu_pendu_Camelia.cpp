@@ -18,9 +18,16 @@
 /*************************************/
 /* Espace de nom                     */
 /*************************************/
+  using namespace std;                //
+
+/*************************************/
+/* Directives au préprocesseur       */
+/*************************************/
   #include <cstring>                  //
   #include <fstream>                  //
   #include <iostream>                 //
+  #include <chrono>                   //
+  #include <thread>                   //
 
 /*************************************/
 /* Notes personnelles                */
@@ -312,6 +319,10 @@
 /* Utilise: pStringReplace, pAfficheEcran, pScreenReplace                                                                                                                    */
 /*===========================================================================================================================================================================*/
   {
+    
+    using namespace std::this_thread;   // sleep_for, sleep_until
+    using namespace std::chrono;        // nanoseconds, system_clock, seconds
+    
     char affichageTemp [23][81];
     for (int frame = 0; frame < 6; frame++)
     {
@@ -368,6 +379,6 @@
         pStringReplace(affichageTemp[12], affichage[12]               );
       }
       pAfficheEcran(affichageTemp);
-      system("pause");
+      sleep_for(milliseconds(500));
     }
   }
