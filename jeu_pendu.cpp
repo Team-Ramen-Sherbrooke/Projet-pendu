@@ -43,8 +43,8 @@
   #include <cstring>                  //
   #include <fstream>                  //
   #include <iostream>                 //
-  #include "jeu_pendu_Camelia.cpp"    //
-  #include "jeu_penduDavid.cpp"       //
+  #include "jeu_pendu_Camelia.cpp"    // pAfficheEcran, pAffichageInitial, pAffichageBarresVides, fCorrespondanceLettreChiffre
+  //#include "jeu_penduDavid.cpp"       //
 
 /*************************************/
 /* Variables globales                */
@@ -78,8 +78,8 @@
     false, //x
     false, //y
     false  //z
-  } ;
-  char vgl_mot[40];
+  };
+  char vgl_mot[30];
 
 /*************************************/
 /* Constantes                        */
