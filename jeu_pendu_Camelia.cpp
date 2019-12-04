@@ -55,7 +55,7 @@
   //                                                                                                                               //      Ligne 15
   //                                                                                                                               //      Ligne 16
   //                                                                                                                               //      Ligne 17
-  const char *cst_BarreHorizontalePleine   = "-------------------------------------------------------------------------------\n";  //80 -  Ligne 18
+  const char *cst_BarreHorizontalePleine   = "-------------------------------------------------------------------------------\n";  //79 -  Ligne 18
   const char *cst_MauvaisCaracInitial      = " Caracteres demandes, mais absents du mot: \n";                                      //      Ligne 19 Devra se voir ajouter les caractères essayés
   //                                          --------------------------------------------------------------------------------     //      Ligne 20
   const char *cst_Indication               = " Entrez un caractere (ou '#' suivi du mot que vous voulez essayer):            \n";  //      Ligne 21
@@ -65,18 +65,35 @@
   //Lignes additionnelles//
   /////////////////////////
   const char *cst_MauvaisCarac             = " Caracteres demandes, mais absents du mot: ";                                        //Copie Ligne 19 mais sans le retour à la ligne pour permettre l'ajout des autres lettres
-
+  
+  //////////////////////////
+  //Caractère déjà utilisé//
+  //////////////////////////
+  const char *cst_AnimCaracDejaUtilise1[3] = 
+  {                                          "                                                                               \n",  //      Ligne  8 et 12 Frame 1 et 5
+                                             "                                                                               \n",  //      Ligne  8 et 12 Frame 2 et 4
+                                             "                  ********************************************                 \n"}; //      Ligne  8 et 12 Frame 3
+  
+  const char *cst_AnimCaracDejaUtilise2[3] = 
+  {                                          "                                                                               \n",  //      Ligne  9 et 11 Frame 1 et 5
+                                             "                             **********************                            \n",  //      Ligne  9 et 11 Frame 2 et 4
+                                             "                  *                                          *                 \n"}; //      Ligne  9 et 11 Frame 3
+  const char *cst_AnimCaracDejaUtilise3[3] =
+  {                                          "                                     ******                                    \n",  //      Ligne 10       Frame 1 et 5
+                                             "                             *                    *                            \n",  //      Ligne 10       Frame 2 et 4
+                                             "                  *   Le caractere ' ' a deja ete utilise!   *                 \n"}; //      Ligne 10       Frame 3      Pos 36 = Carac à remplacer
+                                             
 /*===========================================================================================================================================================================*/
   void pAfficheEcran ( char affichage [23][81])
 /*===========================================================================================================================================================================*/
-/* Utilisé par: main                                                                                                                                                         */
+/* Utilisé par: main, pCaracDejaEntreeAnimation                                                                                                                              */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* Cette procédure sert à afficher le jeu sur l'écran                                                                                                                        */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* Utilise: N\A                                                                                                                                                              */
 /*===========================================================================================================================================================================*/
   {
-    //system("cls");
+    system("cls");
     for (int row = 0; row < 23; row++)
     {
       printf("%s", affichage[row]);
@@ -158,6 +175,41 @@
     for (unsigned int x = 0; x < 81; x++)
     {
       destination[x] = source[x];
+    }
+  }
+  
+/*===========================================================================================================================================================================*/
+  void pStringReplace (char destination [81], const char source [81])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: pAffichageLettresErronees, pAffichageBarresVides                                                                                                             */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à remplacer une ligne par une autre                                                                                                                  */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: N\A                                                                                                                                                              */
+/*===========================================================================================================================================================================*/
+  {
+    for (unsigned int x = 0; x < 81; x++)
+    {
+      destination[x] = source[x];
+    }
+  }
+
+/*===========================================================================================================================================================================*/
+  void pScreenReplace (char destination [23][81], char source [23][81])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: pAffichageLettresErronees, pAffichageBarresVides                                                                                                             */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à remplacer une ligne par une autre                                                                                                                  */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: N\A                                                                                                                                                              */
+/*===========================================================================================================================================================================*/
+  {
+    for (unsigned int y = 0; y < 23; y++)
+    {
+      for (unsigned int x = 0; x < 81; x++)
+      {
+        destination[y][x] = source[y][x];
+      }
     }
   }
   
@@ -248,4 +300,74 @@
     }
     ligne[posDansLigne] = '\n';
     pStringReplace(affichage[19], ligne);
+  }
+
+/*===========================================================================================================================================================================*/
+  void pCaracDejaEntreeAnimation (char affichage [23][81], char lettreEntree)
+/*===========================================================================================================================================================================*/
+/* Utilisé par: main                                                                                                                                                         */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à afficher une animation lorsque l'utilisateur entre un caractère qu'il a déjà entré au préalable                                                    */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: pStringReplace, pAfficheEcran, pScreenReplace                                                                                                                    */
+/*===========================================================================================================================================================================*/
+  {
+    char affichageTemp [23][81];
+    for (int frame = 0; frame < 6; frame++)
+    {
+      pScreenReplace(affichageTemp, affichage);
+      switch (frame)
+      {
+        case 0:
+        pStringReplace(affichageTemp[ 8], affichage[ 8]               );
+        pStringReplace(affichageTemp[ 9], affichage[ 9]               );
+        pStringReplace(affichageTemp[10], cst_AnimCaracDejaUtilise3[0]);
+        pStringReplace(affichageTemp[11], affichage[11]               );
+        pStringReplace(affichageTemp[12], affichage[12]               );
+        break;
+        
+        case 1:
+        pStringReplace(affichageTemp[ 8], affichage[ 8]               );
+        pStringReplace(affichageTemp[ 9], cst_AnimCaracDejaUtilise2[1]);
+        pStringReplace(affichageTemp[10], cst_AnimCaracDejaUtilise3[1]);
+        pStringReplace(affichageTemp[11], cst_AnimCaracDejaUtilise2[1]);
+        pStringReplace(affichageTemp[12], affichage[12]               );
+        break;
+        
+        case 2:
+        pStringReplace(affichageTemp[ 8], cst_AnimCaracDejaUtilise1[2]);
+        pStringReplace(affichageTemp[ 9], cst_AnimCaracDejaUtilise2[2]);
+        pStringReplace(affichageTemp[10], cst_AnimCaracDejaUtilise3[2]);
+        pStringReplace(affichageTemp[11], cst_AnimCaracDejaUtilise2[2]);
+        pStringReplace(affichageTemp[12], cst_AnimCaracDejaUtilise1[2]);
+        affichageTemp[10][36] = toupper(lettreEntree);
+        break;
+        
+        case 3:
+        pStringReplace(affichageTemp[ 8], affichage[ 8]               );
+        pStringReplace(affichageTemp[ 9], cst_AnimCaracDejaUtilise2[1]);
+        pStringReplace(affichageTemp[10], cst_AnimCaracDejaUtilise3[1]);
+        pStringReplace(affichageTemp[11], cst_AnimCaracDejaUtilise2[1]);
+        pStringReplace(affichageTemp[12], affichage[12]               );
+        break;
+        
+        case 4:
+        pStringReplace(affichageTemp[ 8], affichage[ 8]               );
+        pStringReplace(affichageTemp[ 9], affichage[ 9]               );
+        pStringReplace(affichageTemp[10], cst_AnimCaracDejaUtilise3[0]);
+        pStringReplace(affichageTemp[11], affichage[11]               );
+        pStringReplace(affichageTemp[12], affichage[12]               );
+        break;
+        
+        case 5:
+        
+        pStringReplace(affichageTemp[ 8], affichage[ 8]               );
+        pStringReplace(affichageTemp[ 9], affichage[ 9]               );
+        pStringReplace(affichageTemp[10], affichage[10]               );
+        pStringReplace(affichageTemp[11], affichage[11]               );
+        pStringReplace(affichageTemp[12], affichage[12]               );
+      }
+      pAfficheEcran(affichageTemp);
+      system("pause");
+    }
   }
