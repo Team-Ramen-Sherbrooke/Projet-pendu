@@ -207,7 +207,7 @@
 /*===========================================================================================================================================================================*/
   {
     int nbDeLettresErronees = 0;
-    char ligne[81];
+    char ligne[83];
     int posDansLigne = 43;
     bool lettreErronee = true;
     
@@ -246,6 +246,6 @@
         }
       }
     }
-    ligne[80] = '\n';
+    ligne[posDansLigne] = '\n';
     pStringReplace(affichage[19], ligne);
   }
