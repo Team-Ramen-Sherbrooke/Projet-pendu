@@ -63,7 +63,7 @@
   //                                                                                                                               //      Ligne 16
   //                                                                                                                               //      Ligne 17
   const char *cst_BarreHorizontalePleine   = "-------------------------------------------------------------------------------\n";  //79 -  Ligne 18
-  //                                       = " Caracteres demandes, mais absents du mot:\n";                                       //      Ligne 19 Devra se voir ajouter les caractères essayés
+  //                                           Caracteres demandes, mais absents du mot:                                           //      Ligne 19 Devra se voir ajouter les caractères essayés
   //                                          --------------------------------------------------------------------------------     //      Ligne 20
   const char *cst_Indication               = " Entrez un caractere (ou '#' suivi du mot que vous voulez essayer):            \n";  //      Ligne 21
   const char *cst_Curseur                  = " >";                                                                                 //      Ligne 22
@@ -89,7 +89,7 @@
   {                                          "                                     ******                                    \n",  //      Ligne 10       Frame 1 et 5
                                              "                             *                    *                            \n",  //      Ligne 10       Frame 2 et 4
                                              "                  *   Le caractere ' ' a deja ete utilise!   *                 \n"}; //      Ligne 10       Frame 3      Pos 36 = Carac à remplacer
-                                             
+
 /*===========================================================================================================================================================================*/
   void pAfficheEcran ( char affichage [23][81])
 /*===========================================================================================================================================================================*/
@@ -382,6 +382,27 @@
         pStringReplace(affichageTemp[12], affichage[12]               );
       }
       pAfficheEcran(affichageTemp);
-      sleep_for(milliseconds(500));
+      switch (frame)
+      {
+        case 0:
+        sleep_for(milliseconds(200));
+        break;
+        
+        case 1:
+        sleep_for(milliseconds(200));
+        break;
+        
+        case 2:
+        sleep_for(milliseconds(1000));
+        break;
+        
+        case 3:
+        sleep_for(milliseconds(200));
+        break;
+        
+        case 4:
+        sleep_for(milliseconds(200));
+        break;
+      }
     }
   }
