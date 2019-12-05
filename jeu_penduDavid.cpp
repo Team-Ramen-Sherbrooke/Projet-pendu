@@ -35,84 +35,129 @@
 /*************************************/
 /* Espace de nom                     */
 /*************************************/
-#include <cstring>
-#include <fstream>
-#include <iostream>
-#include "jeu_pendu_Camelia.cpp"
+  #include <cstring>
+  #include <fstream>
+  #include <iostream>
+  #include "jeu_pendu_Camelia.cpp"
+
 /*************************************/
   using namespace std;
 
 /*************************************/
 /* Constantes                        */
 /*************************************/
-const char vec_Mot [50] ="A";
+  char vec_Mot [50] ="unmot";
+  int vgl_nbErreurs =0;
 
-
-
-char* fEnlever(char vec_MotEntrer [], char vec_temp [])
-{
-    for(unsigned int i=0; i<strlen(vec_MotEntrer) ;i++)
-    {
-      if(vec_MotEntrer[i] != '\0')
+/*===========================================================================================================================================================================*/
+  void pEnlever(char vec_MotEntrer [], char vec_temp [])
+/*===========================================================================================================================================================================*/
+/* Utilisé par:pVerificationMotComplet                                                                                                                                                 */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à enlever le # du mot entré                                                                                                                          */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: n/a                                                                                                                                                              */
+/*===========================================================================================================================================================================*/
+  {
+      for(unsigned int i=0; i<strlen(vec_MotEntrer) ;i++)
       {
-        vec_temp [i] = vec_MotEntrer [i+1];
+        if(vec_MotEntrer[i] != '\0')
+        {
+          vec_temp [i] = vec_MotEntrer [i+1];
+        }
+      }
+  }
+
+/*===========================================================================================================================================================================*/
+  void pVerificationMotComplet(int &vgl_nbErreurs, char vec_Mot [],char vec_MotEntrer [], char vec_temp [])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: main                                                                                                                                                         */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à vérifier le mot complet après le #                                                                                                                 */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: pEnlever                                                                                                                                                         */
+/*===========================================================================================================================================================================*/
+  {
+  bool reponseErronee = false;
+  if (vec_MotEntrer [0] == '#')
+  {
+    pEnlever(vec_MotEntrer, vec_temp);
+    for (int posDansMot = 0; vec_Mot[posDansMot] != '\0'; posDansMot++)
+    {
+      if (vec_Mot[posDansMot] != vec_temp[posDansMot])
+      {
+        reponseErronee = true;
+        break;
       }
     }
-    return vec_temp;
-}
-
-
-
-
-/*char fMotComplet(char* vec_MotEntrer, char* vec_Mot)
-{
-  char* vec_Mot = "unmot";
-  
-  cin >> vec_MotEntrer;
-  if (vec_MotEntrer [0] == "#" && vec_MotEntrer == vec_Mot)
-  {
-    cout << "Bonne Reponse";
+      if (reponseErronee == true || (strlen(vec_MotEntrer) != 1))
+      {
+        vgl_nbErreurs +=1;
+      }
+      else
+      {
+        cout << "Victoire2";
+      }
+    }
   }
-  return 0;
-}*/
+
+/*===========================================================================================================================================================================*/
+  void pVerificationLettre(int &vgl_nbErreurs, char vec_Mot [],char vec_MotEntrer [], char vec_temp [])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: main                                                                                                                                                         */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à la vérification des lettres entreées une par une.                                                                                                  */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: n\a                                                                                                                                                              */
+/*===========================================================================================================================================================================*/
+  {
+    int bonnelettre = 0;
+    
+    if(strlen(vec_MotEntrer) == 1)
+    {
+      for (int posDansMot = 0; vec_Mot[posDansMot] != '\0'; posDansMot++)
+      {
+        if (vec_Mot[posDansMot] = vec_MotEntrer [0])
+        {
+          bonnelettre +=1;
+        }
+      }
+      if (bonnelettre == 0)
+      {
+        vgl_nbErreurs +=1;
+      }
+      else
+      {
+        cout << "Victoire2";
+      }
+    }
+    else
+    {
+    cout << "erreur2"; 
+    }
+  }
+
 
   int main ()
   {
     
-  char vec_MotEntrer [50] = "\0";  
-  char vec_temp [50] ="\0";
-
+    char vec_MotEntrer [50] = "\0";  
+    char vec_temp [50] ="\0";
 
   
-  cin >> vec_MotEntrer;
-  //fMotComplet(vec_MotEntrer, vec_Mot);
-    fEnlever(vec_MotEntrer,vec_temp);
+    cin >> vec_MotEntrer;
     
-    if(strlen(vec_MotEntrer) == 1)
-    {
-      cout << "5";
-    }
-    else{ cout << "erreur"; }
-    
-    
-    
-    
-    cout << vec_temp;
+    pEnlever(vec_MotEntrer, vec_temp);
+    pVerificationMotComplet(vgl_nbErreurs, vec_Mot, vec_MotEntrer, vec_temp);
+    pVerificationLettre (vgl_nbErreurs, vec_Mot, vec_MotEntrer, vec_temp);
+
+    //cout << vgl_nbErreurs;
+    //cout << vec_temp;
+
   
-    /*if (vec_temp == vec_Mot)
-    {
-      cout << "Bonne Reponse";
-    }
-    else
-    {
-      cout << "erreur2";
-    }*/
-    
     return 0;
   }
 
-    
-    
     
     
     
