@@ -38,9 +38,7 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-
-/*************************************/
-/* Espace de nom                     */
+#include "jeu_pendu_Camelia.cpp"
 /*************************************/
   using namespace std;
 
