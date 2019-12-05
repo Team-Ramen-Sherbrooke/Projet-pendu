@@ -47,12 +47,21 @@
 /*************************************/
 /* Constantes                        */
 /*************************************/
+const char vec_Mot [50] ="A";
 
 
 
-
-
-
+char* fEnlever(char vec_MotEntrer [], char vec_temp [])
+{
+    for(unsigned int i=0; i<strlen(vec_MotEntrer) ;i++)
+    {
+      if(vec_MotEntrer[i] != '\0')
+      {
+        vec_temp [i] = vec_MotEntrer [i+1];
+      }
+    }
+    return vec_temp;
+}
 
 
 
@@ -65,39 +74,41 @@
   if (vec_MotEntrer [0] == "#" && vec_MotEntrer == vec_Mot)
   {
     cout << "Bonne Reponse";
-    
-    
-    
   }
-  
-    
-    
-  return 0; 
+  return 0;
 }*/
-    
-    
-    
-    
-/*==========================================================================*/
+
   int main ()
-/*==========================================================================*/
-/* Programme principal                                                      */
-/*==========================================================================*/
   {
     
-  char vec_MotEntrer [] = "\0";  
-  char vec_Mot [] ="unmot";
+  char vec_MotEntrer [50] = "\0";  
+  char vec_temp [50] ="\0";
+
+
   
   cin >> vec_MotEntrer;
-  if (vec_MotEntrer [0] == "#" )//&& vec_MotEntrer == vec_Mot)
-  {
-    cout << "Bonne Reponse";
-  }
-  else
-  {
-    cout <<"Mauvaise reponse";
-  }
+  //fMotComplet(vec_MotEntrer, vec_Mot);
+    fEnlever(vec_MotEntrer,vec_temp);
     
+    if(strlen(vec_MotEntrer) == 1)
+    {
+      cout << "5";
+    }
+    else{ cout << "erreur"; }
+    
+    
+    
+    
+    cout << vec_temp;
+  
+    /*if (vec_temp == vec_Mot)
+    {
+      cout << "Bonne Reponse";
+    }
+    else
+    {
+      cout << "erreur2";
+    }*/
     
     return 0;
   }
