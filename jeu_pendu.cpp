@@ -81,6 +81,7 @@
     false  //z
   };
   char vgl_mot[30];
+  int  vgl_nbErreurs = 0;
 
 /*************************************/
 /* Constantes                        */
