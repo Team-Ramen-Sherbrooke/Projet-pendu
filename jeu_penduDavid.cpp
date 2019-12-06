@@ -48,6 +48,35 @@
 /*************************************/
   char vec_Mot [50] ="unmot";
   int vgl_nbErreurs =0;
+  bool vgl_lettresChoisies[26] =
+  {
+    false, //a
+    false, //b
+    false, //c
+    false, //d
+    false, //e
+    false, //f
+    false, //g
+    false, //h
+    false, //i
+    false, //j
+    false, //k
+    false, //l
+    false, //m
+    false, //n
+    false, //o
+    false, //p
+    false, //q
+    false, //r
+    false, //s
+    false, //t
+    false, //u
+    false, //v
+    false, //w
+    false, //x
+    false, //y
+    false  //z
+  };
 
 /*===========================================================================================================================================================================*/
   void pEnlever(char vec_MotEntrer [], char vec_temp [])
@@ -90,13 +119,13 @@
         break;
       }
     }
-      if (reponseErronee == true || (strlen(vec_MotEntrer) != 1))
+      if (reponseErronee == true && (strlen(vec_MotEntrer) != 1))
       {
         vgl_nbErreurs +=1;
       }
       else
       {
-        cout << "Victoire2";
+        cout << "Victoire1";
       }
     }
   }
@@ -151,8 +180,8 @@
     pVerificationMotComplet(vgl_nbErreurs, vec_Mot, vec_MotEntrer, vec_temp);
     pVerificationLettre (vgl_nbErreurs, vec_Mot, vec_MotEntrer, vec_temp);
 
-    //cout << vgl_nbErreurs;
-    //cout << vec_temp;
+    cout << vgl_nbErreurs;
+    cout << vec_temp;
 
   
     return 0;
