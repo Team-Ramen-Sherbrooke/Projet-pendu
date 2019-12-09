@@ -3,8 +3,8 @@
 #include <ctime>
 using namespace std;
 
-const char* cst_cheminFich           ="C:\\prog1\\25.81_liste_mots.txt" ;
-const unsigned int cst_longeurMaxMot =40;
+const char* cst_cheminFich           ="25.81_liste_mots.txt" ;
+const unsigned int cst_longeurMaxMot = 40;
 
 /*==========================================================================*/
 void pMotAleatoire (char vec_motAleatoire[cst_longeurMaxMot])
@@ -15,13 +15,13 @@ void pMotAleatoire (char vec_motAleatoire[cst_longeurMaxMot])
 /* le plus random possible                                                  */
 /*--------------------------------------------------------------------------*/
 {
-  FILE *ptr_FichierMot  = NULL;
+  FILE *ptr_FichierMot;
   int var_longeurFich =0;
   unsigned int var_choixMot =0;
   unsigned int var_randomisation=0;
   srand (time(NULL));
   
-  ptr_FichierMot = fopen(cst_cheminFich,"rt");
+  ptr_FichierMot = fopen(cst_cheminFich,"r");
   while (!feof(ptr_FichierMot))
   {
     fgets(vec_motAleatoire,cst_longeurMaxMot,ptr_FichierMot);

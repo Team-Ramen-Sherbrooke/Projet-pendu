@@ -44,7 +44,7 @@
   #include <fstream>                  //
   #include <iostream>                 //
   #include "jeu_pendu_Camelia.cpp"    // pAfficheEcran, pAffichageInitial, pAffichageBarresVides, fCorrespondanceLettreChiffre
-  #include "jeu_penduDavid.cpp"       //
+//  #include "jeu_penduDavid.cpp"       //
   #include "Pendu_teste_vincent.cpp"  // fVeutContinuer, pMotAleatoire 
 
 /*************************************/
@@ -86,3 +86,17 @@
 /*************************************/
 /* Constantes                        */
 /*************************************/
+
+
+int main()
+{
+  pMotAleatoire(vgl_mot);
+  //Initial
+  pAffichageInitial(vgl_affichage);
+  //Boucle
+  pAffichageBarresVides(vgl_affichage, vgl_mot, vgl_lettresChoisies);
+  pAffichageLettresErronees(vgl_affichage, vgl_mot, vgl_lettresChoisies);
+  pAfficheEcran(vgl_affichage);
+  pAnalyseEntree(vgl_lettresChoisies, vgl_mot, vgl_nbErreurs, vgl_affichage);
+  return 0;
+}
