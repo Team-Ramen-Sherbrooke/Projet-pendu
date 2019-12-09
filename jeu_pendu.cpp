@@ -24,11 +24,15 @@
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 /*                                                                          */
-/* Traitement: -##MUST BE DONE##                                            */
+/* Traitement: -ce programme verifie si la lettre ou le mot entrer par      */
+/*              l'utilisateur sont valide ou ont deja ete entrer.           */
+/*                                                                          */
 /*                                                                          */
 /*--------------------------------------------------------------------------*/
 /*                                                                          */
-/* En sortie.: -##MUST BE DONE##                                            */
+/* En sortie.: -Affiche le pendu et le nombre d'erreur fait emplus que      */
+/*              tout les chiffre entrer par lutilisateur                    */
+/*                                                                          */
 /*                                                                          */
 /****************************************************************************/
 
