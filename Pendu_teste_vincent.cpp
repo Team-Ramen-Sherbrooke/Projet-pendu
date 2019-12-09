@@ -18,7 +18,7 @@ void pMotAleatoire (char vec_motAleatoire[cst_longeurMaxMot])
   FILE *ptr_FichierMot;
   int var_longeurFich =0;
   unsigned int var_choixMot =0;
-  unsigned int var_randomisation=0;
+//  unsigned int var_randomisation=0;
   srand (time(NULL));
   
   ptr_FichierMot = fopen(cst_cheminFich,"r");
@@ -27,19 +27,19 @@ void pMotAleatoire (char vec_motAleatoire[cst_longeurMaxMot])
     fgets(vec_motAleatoire,cst_longeurMaxMot,ptr_FichierMot);
     var_longeurFich++;
   }
-  var_randomisation = rand()%(var_longeurFich/4);
-  var_choixMot = (((rand()%4) - 1)*(var_longeurFich/4)+var_randomisation);
+  //var_randomisation = rand()%(var_longeurFich/4);
+  var_choixMot = rand()%var_longeurFich;
   rewind(ptr_FichierMot);
   for(unsigned int var_chercheLigne=0; var_chercheLigne < var_choixMot; var_chercheLigne++)
   {
-    fgets(vec_motAleatoire,cst_longeurMaxMot,ptr_FichierMot);
+    fgets(vec_motAleatoire, cst_longeurMaxMot, ptr_FichierMot);
     if (feof(ptr_FichierMot))
     {
       break;
     }
   }
   
-  for(unsigned int var_position=0;var_position < cst_longeurMaxMot;var_position++)
+  for(unsigned int var_position = 0; var_position < strlen(vec_motAleatoire); var_position++)
   {
     vec_motAleatoire[var_position] = toupper(vec_motAleatoire[var_position]);
   }
@@ -54,6 +54,7 @@ bool fVeutContinuer ()
 /*--------------------------------------------------------------------------*/
 {
   char var_continuer ='0';
+  cout << "Voulez-vous jouer a nouveau (o/n)? ";
   cin>>var_continuer;
   return toupper(var_continuer) == 'O';
 }

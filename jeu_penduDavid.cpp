@@ -38,7 +38,7 @@
   #include <cstring>
   #include <fstream>
   #include <iostream>
-  #include "jeu_pendu_Camelia.cpp"
+  //#include "jeu_pendu_Camelia.cpp"
 
 /*************************************/
   using namespace std;
@@ -46,7 +46,7 @@
 /*************************************/
 /* Constantes                        */
 /*************************************/
-  char vec_Mot [50] ="unmot";
+  char vec_Mot [30] ="UNMOT";
   int vgl_nbErreurs =0;
   bool vgl_lettresChoisies[26] =
   {
@@ -148,7 +148,7 @@
     {
       for (int posDansMot = 0; vec_Mot[posDansMot] != '\0'; posDansMot++)
       {
-        if (vec_Mot[posDansMot] = vec_MotEntrer [0])
+        if (vec_Mot[posDansMot] == vec_MotEntrer[0])
         {
           bonnelettre +=1;
         }
@@ -193,3 +193,36 @@
     return 0;
   }
   */
+  
+  int main()
+  {
+  char vec_MotEntrer[30];
+  char vec_temp[30];
+  cin >> vec_MotEntrer;
+  
+  bool reponseErronee = false;
+  if (vec_MotEntrer [0] == '#' && strlen(vec_MotEntrer) - 1 == strlen(vec_Mot))
+  {
+    pEnlever(vec_MotEntrer, vec_temp);
+    for (int posDansMot = 0; vec_Mot[posDansMot] != '\0'; posDansMot++)
+    {
+      if (vec_Mot[posDansMot] != toupper(vec_temp[posDansMot]))
+      {
+        reponseErronee = true;
+        break;
+      }
+    }
+      if (reponseErronee == true && (strlen(vec_MotEntrer) != 1))
+      {
+        vgl_nbErreurs +=1;
+      }
+      
+      else
+      {
+        cout << "true";
+      }
+      
+    }
+    return 0;
+  }
+

@@ -52,8 +52,8 @@
   //                                                                                                                               //      Ligne  5
   const char *cst_DessusPendu              = "                                     _____\n";                                       //      Ligne  6
   const char *cst_PoteauPremiereLigne      = "                                     |/\n";                                          //      Ligne  7
-  const char *cst_PoteauVertical           = "                                     |\n";                                           //      Ligne  8
-  //                                                                               |                                               //      Ligne  9
+  const char *cst_PoteauVerticalBug        = "                                    |  \n";                                          //      Ligne  8
+  const char *cst_PoteauVertical           = "                                     |\n";                                           //      Ligne  9
   //                                                                               |                                               //      Ligne 10
   const char *cst_PoteauBase               = "                                   __|_______\n";                                    //      Ligne 11
   //                                                                                                                               //      Ligne 12
@@ -89,6 +89,7 @@
   {                                          "                                     ******                                    \n",  //      Ligne 10       Frame 1 et 5
                                              "                             *                    *                            \n",  //      Ligne 10       Frame 2 et 4
                                              "                  *   Le caractere ' ' a deja ete utilise!   *                 \n"}; //      Ligne 10       Frame 3      Pos 36 = Carac à remplacer
+                                             
 
 /*===========================================================================================================================================================================*/
   void pAfficheEcran ( char affichage [23][81])
@@ -108,7 +109,7 @@
   }
 
 /*===========================================================================================================================================================================*/
-  void pAffichageInitial (char affichage [23][81])
+  void pAffichageInitial (char affichage [23][81], char mot [])
 /*===========================================================================================================================================================================*/
 /* Utilisé par: main                                                                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -117,7 +118,11 @@
 /* Utilise: N\A                                                                                                                                                              */
 /*===========================================================================================================================================================================*/
   {
-    strcpy(affichage[ 0], "\n");                       //Ligne  0
+    char affichageMot[30];
+    strcpy(affichageMot, mot);
+    affichageMot[strlen(affichageMot) + 1] = '\n';
+    affichageMot[29] = '\n';
+    strcpy(affichage[ 0], affichageMot);               //Ligne  0
     strcpy(affichage[ 1], cst_BarreSupEtInfTitre);     //Ligne  1
     strcpy(affichage[ 2], cst_Titre);                  //Ligne  2
     strcpy(affichage[ 3], cst_BarreSupEtInfTitre);     //Ligne  3
@@ -125,7 +130,7 @@
     strcpy(affichage[ 5], "\n");                       //Ligne  5
     strcpy(affichage[ 6], cst_DessusPendu);            //Ligne  6
     strcpy(affichage[ 7], cst_PoteauPremiereLigne);    //Ligne  7
-    strcpy(affichage[ 8], cst_PoteauVertical);         //Ligne  8
+    strcpy(affichage[ 8], cst_PoteauVerticalBug);      //Ligne  8
     strcpy(affichage[ 9], cst_PoteauVertical);         //Ligne  9
     strcpy(affichage[10], cst_PoteauVertical);         //Ligne 10
     strcpy(affichage[11], cst_PoteauBase);             //Ligne 11
@@ -181,7 +186,14 @@
   {
     for (unsigned int x = 0; x < 81; x++)
     {
-      destination[x] = source[x];
+      if (source[x] != '\0')
+      {
+        destination[x] = source[x];
+      }
+      else
+      {
+        destination[x] = '\0';
+      }
     }
   }
   
@@ -197,7 +209,14 @@
   {
     for (unsigned int x = 0; x < 81; x++)
     {
-      destination[x] = source[x];
+      if (source[x] != '\0')
+      {
+        destination[x] = source[x];
+      }
+      else
+      {
+        destination[x] = '\0';
+      }
     }
   }
 
@@ -213,9 +232,18 @@
   {
     for (unsigned int y = 0; y < 23; y++)
     {
-      for (unsigned int x = 0; x < 81; x++)
       {
-        destination[y][x] = source[y][x];
+        for (unsigned int x = 0; x < 81; x++)
+        {
+          if (source[y][x] != '\0')
+          {
+            destination[y][x] = source[y][x];
+          }
+          else
+          {
+            destination[y][x] = '\0';
+          }
+        }
       }
     }
   }
@@ -238,7 +266,7 @@
       ligne[i] = ' ';
     }
     
-    for(unsigned int i = 0; i < strlen(mot); i++)
+    for(unsigned int i = 0; i < strlen(mot) - 1; i++)
     {
       if (lettresChoisies[fCorrespondanceLettreChiffre(mot[i])])
       {
@@ -252,7 +280,7 @@
       ligne[x] = ' ';
       x++;
     }
-    pStringReplace(affichage[14], ligne);
+    strcpy(affichage[13], ligne);
   }
 
 /*===========================================================================================================================================================================*/
@@ -408,121 +436,163 @@
   }
 
 /*===========================================================================================================================================================================*/
-  void pEnlever(char vec_MotEntrer [], char vec_temp [])
-/*===========================================================================================================================================================================*/
-/* Utilisé par: pVerificationMotComplet                                                                                                                                      */
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Cette procédure sert à enlever le # du mot entré                                                                                                                          */
-/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Utilise: n/a                                                                                                                                                              */
-/*===========================================================================================================================================================================*/
-  {
-      for(unsigned int i=0; i<strlen(vec_MotEntrer) ;i++)
-      {
-        if(vec_MotEntrer[i] != '\0')
-        {
-          vec_temp [i] = vec_MotEntrer [i+1];
-        }
-      }
-  }
-
-/*===========================================================================================================================================================================*/
-  void pVerificationMotComplet(int &vgl_nbErreurs, char vec_Mot [],char vec_MotEntrer [], char vec_temp [])
+  void pAnalyseVictoire (bool lettresChoisies [26], char mot[30], bool &victory)
 /*===========================================================================================================================================================================*/
 /* Utilisé par: main                                                                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Cette procédure sert à vérifier le mot complet après le #                                                                                                                 */
+/* Cette procédure sert à détecter si l'utilisateur a gagné en rentrant toutes les lettres individuellements                                                                 */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Utilise: pEnlever                                                                                                                                                         */
+/* Utilise: fCorrespondanceLettreChiffre                                                                                                                                     */
 /*===========================================================================================================================================================================*/
   {
-  bool reponseErronee = false;
-  if (vec_MotEntrer [0] == '#')
-  {
-    pEnlever(vec_MotEntrer, vec_temp);
-    for (int posDansMot = 0; vec_Mot[posDansMot] != '\0'; posDansMot++)
+    bool tempVictory = true;
+    for (unsigned int x = 0; x < strlen(mot) - 1; x++)
     {
-      if (vec_Mot[posDansMot] != vec_temp[posDansMot])
+      if (!lettresChoisies[fCorrespondanceLettreChiffre(mot[x])])
       {
-        reponseErronee = true;
+        tempVictory = false;
         break;
       }
     }
-      if (reponseErronee == true && (strlen(vec_MotEntrer) != 1))
-      {
-        vgl_nbErreurs +=1;
-      }
-      /*
-      else
-      {
-        cout << "Victoire1";
-      }
-      */
+    if (tempVictory)
+    {
+      victory = true;
     }
   }
 
+
 /*===========================================================================================================================================================================*/
-  void pVerificationLettre(int &vgl_nbErreurs, char vec_Mot [],char vec_MotEntrer [], char vec_temp [], bool lettresChoisies[26])
+  void pReceptionEntree (bool lettresChoisies [26], char mot[30], bool &victory, char affichage[23][81], int &nbErreurs)
 /*===========================================================================================================================================================================*/
 /* Utilisé par: main                                                                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Cette procédure sert à la vérification des lettres entrées individuelles                                                                                                  */
+/* Cette procédure sert à recevoir et analyser l'entrée de l'utilisateur                                                                                                     */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Utilise: n\a                                                                                                                                                              */
+/* Utilise:                                                                                                                                                                  */
 /*===========================================================================================================================================================================*/
   {
-    int bonnelettre = 0;
+    char entreeUtilisateur[30];
+    bool lettreErronee = false;
     
-    if(strlen(vec_MotEntrer) == 1)
+    cin >> entreeUtilisateur;
+    for (unsigned int x = 0; x < strlen(entreeUtilisateur); x++)
     {
-      for (int posDansMot = 0; vec_Mot[posDansMot] != '\0'; posDansMot++)
+      entreeUtilisateur[x] = toupper(entreeUtilisateur[x]);
+    }
+    if (strlen(entreeUtilisateur) == 1)
+    {
+      if (lettresChoisies[fCorrespondanceLettreChiffre(entreeUtilisateur[0])])
       {
-        if (vec_Mot[posDansMot] == vec_MotEntrer [0])
+        pCaracDejaEntreeAnimation(affichage, entreeUtilisateur[0]);
+      }
+      else
+      {
+        lettresChoisies[fCorrespondanceLettreChiffre(entreeUtilisateur[0])] = true;
+        lettreErronee = true;
+        for (unsigned int x = 0; x < strlen(mot); x++)
         {
-          bonnelettre +=1;
+          if (mot[x] == entreeUtilisateur[0])
+          {
+            lettreErronee = false;
+            break;
+          }
+        }
+        if (lettreErronee)
+        {
+          nbErreurs += 1;
         }
       }
-      if (bonnelettre == 0)
-      {
-        vgl_nbErreurs +=1;
-      }
-      /*
-      else
-      {
-        cout << "Victoire2";
-      }
-      */
     }
-    /*
     else
     {
-    cout << "erreur2"; 
+      bool tempVictory = false;
+      if (entreeUtilisateur[0] == '#' && strlen(entreeUtilisateur) == strlen(mot))
+      {
+        tempVictory = true;
+        for (unsigned int x = 0; x < strlen(mot) - 1; x++)
+        {
+          if (mot[x] != entreeUtilisateur[x+1])
+          {
+            nbErreurs += 1;
+            tempVictory = false;
+            break;
+          } 
+        }
+      }
+      else
+      {
+        nbErreurs += 1;
+      }
+      if (tempVictory)
+      {
+        victory = true;
+      }
     }
-    */
   }
 
 /*===========================================================================================================================================================================*/
-  void pAnalyseEntree (bool lettresChoisies[26], char mot[40], int &nbErreurs, char affichage[23][81])
+  void pAffichageErreurs (char affichage [23][81], int nbErreurs)
 /*===========================================================================================================================================================================*/
 /* Utilisé par: main                                                                                                                                                         */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Cette procédure sert à recevoir l'entrée de l'utilisateur et de procéder à son analyse                                                                                    */
+/* Cette procédure sert à afficher le pendu                                                                                                                                  */
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Utilise: pVerificationLettre, pVerificationMotComplet, pEnlever, pCaracDejaEntreeAnimation, pAffichageInitial, fCorrespondanceLettreChiffre                               */
+/* Utilise:                                                                                                                                                                  */
 /*===========================================================================================================================================================================*/
   {
-    char vct_entreeUtilisateur [30];
-    char vct_motTemp [30];
-    
-    cin >> vct_entreeUtilisateur;
-    if (lettresChoisies[fCorrespondanceLettreChiffre(vct_entreeUtilisateur[0])])
+    char var = '0';
+    char ligne[81];
+    strcpy(ligne, affichage[7]);
+    switch (nbErreurs)
     {
-      pCaracDejaEntreeAnimation(affichage, vct_entreeUtilisateur[0]);
+      case 1:
+      var = '1';
+      break;
+      
+      case 2:
+      var = '2';
+      break;
+      
+      case 3:
+      var = '3';
+      break;
+      
+      case 4:
+      var = '4';
+      break;
+      
+      case 5:
+      var = '5';
+      break;
+      
+      case 6:
+      var = '6';
+      break;
+      
+      case 7:
+      var = 'P';
+      break;
     }
-    else
-    {
-      pEnlever(mot, vct_motTemp);
-      pVerificationMotComplet(nbErreurs, mot, vct_entreeUtilisateur, vct_motTemp);
-      pVerificationLettre (nbErreurs, mot, vct_entreeUtilisateur, vct_motTemp, lettresChoisies);
-    }
+    affichage[7][39] = '|';
+    affichage[7][40] = '\n';
+    affichage[8][38] = var;
+    affichage[8][39] = '\n';
+  }
+
+
+/*===========================================================================================================================================================================*/
+  void pAffichageVictoire (char affichage[23][81])
+/*===========================================================================================================================================================================*/
+/* Utilisé par: main                                                                                                                                                         */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Cette procédure sert à dire à l'utilisateur qu'il a gagné                                                                                                                 */
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Utilise: N\A                                                                                                                                                              */
+/*===========================================================================================================================================================================*/
+  {
+    pStringReplace(affichage[ 7], "                       **********************************\n");
+    pStringReplace(affichage[ 8], "                       *                                *\n");
+    pStringReplace(affichage[ 9], "                       *   BRAVO! VOUS L'AVEZ TROUVE!   *\n");
+    pStringReplace(affichage[10], "                       *                                *\n");
+    pStringReplace(affichage[11], "                       **********************************\n");
   }

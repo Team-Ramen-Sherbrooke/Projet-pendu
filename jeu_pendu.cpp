@@ -50,38 +50,8 @@
 /*************************************/
 /* Variables globales                */
 /*************************************/
-  char vgl_affichage[23][81];
-  bool vgl_lettresChoisies[26] =
-  {
-    false, //a
-    false, //b
-    false, //c
-    false, //d
-    false, //e
-    false, //f
-    false, //g
-    false, //h
-    false, //i
-    false, //j
-    false, //k
-    false, //l
-    false, //m
-    false, //n
-    false, //o
-    false, //p
-    false, //q
-    false, //r
-    false, //s
-    false, //t
-    false, //u
-    false, //v
-    false, //w
-    false, //x
-    false, //y
-    false  //z
-  };
-  char vgl_mot[30];
-  int  vgl_nbErreurs = 0;
+  
+
 
 /*************************************/
 /* Constantes                        */
@@ -90,13 +60,72 @@
 
 int main()
 {
-  pMotAleatoire(vgl_mot);
-  //Initial
-  pAffichageInitial(vgl_affichage);
-  //Boucle
-  pAffichageBarresVides(vgl_affichage, vgl_mot, vgl_lettresChoisies);
-  pAffichageLettresErronees(vgl_affichage, vgl_mot, vgl_lettresChoisies);
-  pAfficheEcran(vgl_affichage);
-  pAnalyseEntree(vgl_lettresChoisies, vgl_mot, vgl_nbErreurs, vgl_affichage);
+  do
+  {
+    char vgl_affichage[23][81];
+    char vgl_mot[30];
+    int  vgl_nbErreurs = 0;
+    bool vgl_lettresChoisies[26] =
+    {
+      false, //a
+      false, //b
+      false, //c
+      false, //d
+      false, //e
+      false, //f
+      false, //g
+      false, //h
+      false, //i
+      false, //j
+      false, //k
+      false, //l
+      false, //m
+      false, //n
+      false, //o
+      false, //p
+      false, //q
+      false, //r
+      false, //s
+      false, //t
+      false, //u
+      false, //v
+      false, //w
+      false, //x
+      false, //y
+      false  //z
+    };
+    bool vgl_victory = false;
+    
+    pMotAleatoire(vgl_mot);
+    //Initial
+    pAffichageInitial(vgl_affichage, vgl_mot);
+    //Boucle
+    while (vgl_nbErreurs < 7 && !vgl_victory)
+    {
+      pAffichageBarresVides(vgl_affichage, vgl_mot, vgl_lettresChoisies);
+      pAffichageLettresErronees(vgl_affichage, vgl_mot, vgl_lettresChoisies);
+      pAffichageErreurs(vgl_affichage, vgl_nbErreurs);
+      pAfficheEcran(vgl_affichage);
+      pReceptionEntree(vgl_lettresChoisies, vgl_mot, vgl_victory, vgl_affichage, vgl_nbErreurs);
+      pAnalyseVictoire(vgl_lettresChoisies, vgl_mot, vgl_victory);
+    }
+    if (vgl_victory)
+    {
+      for (int i = 0; i < 26; i++)
+      {
+        vgl_lettresChoisies[i] = true;
+      }
+    }
+    pAffichageBarresVides(vgl_affichage, vgl_mot, vgl_lettresChoisies);
+    if (!vgl_victory)
+    pAffichageLettresErronees(vgl_affichage, vgl_mot, vgl_lettresChoisies);
+    pAffichageErreurs(vgl_affichage, vgl_nbErreurs);
+    if (vgl_victory)
+    {
+      pAffichageVictoire(vgl_affichage);
+    }
+    pAfficheEcran(vgl_affichage);
+  }
+  while(fVeutContinuer());
   return 0;
 }
