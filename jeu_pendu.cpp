@@ -47,9 +47,9 @@
   #include <cstring>                  //
   #include <fstream>                  //
   #include <iostream>                 //
-  #include "jeu_pendu_Camelia.cpp"    // pAfficheEcran, pAffichageInitial, pAffichageBarresVides, fCorrespondanceLettreChiffre
+//  #include "jeu_pendu_Camelia.cpp"    // pAfficheEcran, pAffichageInitial, pAffichageBarresVides, fCorrespondanceLettreChiffre
 //  #include "jeu_penduDavid.cpp"       //
-  #include "Pendu_teste_vincent.cpp"  // fVeutContinuer, pMotAleatoire 
+//  #include "Pendu_teste_vincent.cpp"  // fVeutContinuer, pMotAleatoire 
 
 /*************************************/
 /* Variables globales                */
